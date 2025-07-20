@@ -1,8 +1,8 @@
 fastapi
 uvicorn
 sqlalchemy
-asyncpg
 psycopg2-binary
-python-dotenv
-passlib[bcrypt]
-python-jose
+
+
+#echo fastapi>>requirements.txt
+#echo uvicorn>>requirements.txt

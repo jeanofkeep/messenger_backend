@@ -2,11 +2,9 @@ from pydantic import BaseModel
 
 class UserCreate(BaseModel):
     username: str
+    name: str
     password: str
 
-class UserOut(BaseModel):
-    id: int
+class UserLogin(BaseModel):
     username: str
-
-    class Config:
-        orm_mode = True
+    password: str

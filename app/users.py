@@ -1,14 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from models import User
-from schemas import UserCreate, UserOut
 from database import SessionLocal
-from passlib.hash import bcrypt
+from models import User as DBUser
+from schemas import UserCreate, UserLogin
 
-router = APIRouter(
-    prefix="/users",
-    tags=["users"]
-)
+router = APIRouter()
 
 def get_db():
     db = SessionLocal()
@@ -17,15 +13,20 @@ def get_db():
     finally:
         db.close()
 
-@router.post("/register", response_model=UserOut)
+@router.post("/register")
 def register(user: UserCreate, db: Session = Depends(get_db)):
-    existing_user = db.query(User).filter(User.username == user.username).first()
+    existing_user = db.query(DBUser).filter(DBUser.username == user.username).first()
     if existing_user:
         raise HTTPException(status_code=400, detail="User already exists")
-
-    hashed = bcrypt.hash(user.password)
-    new_user = User(username=user.username, hashed_password=hashed)
-    db.add(new_user)
+    db_user = DBUser(username=user.username, name=user.name, password=user.password)
+    db.add(db_user)
     db.commit()
-    db.refresh(new_user)
-    return new_user
+    db.refresh(db_user)
+    return {"message": "User created", "username": db_user.username}
+
+@router.post("/login")
+def login(data: UserLogin, db: Session = Depends(get_db)):
+    user = db.query(DBUser).filter(DBUser.username == data.username).first()
+    if not user or user.password != data.password:
+        raise HTTPException(status_code=401, detail="Invalid credentials")
+    return {"message": "Login successful", "username": user.username, "name": user.name}
