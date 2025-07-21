@@ -5,24 +5,23 @@ services:
     image: postgres:15
     container_name: postgres_db
     restart: always
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: messenger
+    env_file:
+      - .env
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "5434:5432"
 
   api:
     build: .
     container_name: fastapi_app
     ports:
-      - "8000:8000"
+      - "8001:8000"
     depends_on:
       - db
-    environment:
-      DATABASE_URL: postgresql://user:password@db:5432/messenger
-
+    env_file:
+      - .env
+    volumes:
+      - ./mess:/app
 volumes:
   postgres_data:

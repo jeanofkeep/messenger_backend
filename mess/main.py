@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.database import Base, engine
-from app.users import router as users_router
+from database import Base, engine
+from users import router as users_router
 
 Base.metadata.create_all(bind=engine)
 
@@ -17,6 +17,9 @@ app.add_middleware(
 
 app.include_router(users_router)
 
+@app.get("/")
+def root():
+    return {"status": "ok"}
 
 """
 from fastapi import FastAPI, HTTPException
