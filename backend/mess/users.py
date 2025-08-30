@@ -31,3 +31,7 @@ def login(data: UserLogin, db: Session = Depends(get_db)):
         raise HTTPException(status_code=401, detail="Invalid credentials")
     return {"message": "Login successful", "username": user.username, "name": user.name}
 
+#@router.get("/search", response_model=list[UserOut])
+#def search_users(query: str, db: Session = Depends(get_db)):
+ #   users = db.query(User).filter(User.username.ilike(f"%{query}%")).all()
+  #  return users

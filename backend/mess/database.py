@@ -17,3 +17,9 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 # Создаем базовый класс для декларативных моделей
 Base = declarative_base()
 
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
