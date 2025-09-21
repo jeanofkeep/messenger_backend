@@ -1,0 +1,51 @@
+/usr/local/lib/python3.11/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+fastapi_app          | * 'orm_mode' has been renamed to 'from_attributes'
+fastapi_app          |   warnings.warn(message, UserWarning)
+grafana              | logger=plugins.registration t=2025-09-21T13:36:26.385227377Z level=info msg="Plugin registered" pluginId=grafana-metricsdrilldown-app
+postgress_db         | 2025-09-21 13:36:26.436 UTC [82] WARNING:  database "messenger" has a collation version mismatch
+postgress_db         | 2025-09-21 13:36:26.436 UTC [82] DETAIL:  The database was created using collation version 2.36, but the operating system provides version 2.41.
+postgress_db         | 2025-09-21 13:36:26.436 UTC [82] HINT:  Rebuild all objects in this database that use the default collation and run ALTER DATABASE messenger REFRESH COLLATION VERSION, or build PostgreSQL with the right library version.
+fastapi_app          | Process SpawnProcess-1:
+fastapi_app          | Traceback (most recent call last):
+fastapi_app          |   File "/usr/local/lib/python3.11/multiprocessing/process.py", line 314, in _bootstrap
+fastapi_app          |     self.run()
+fastapi_app          |   File "/usr/local/lib/python3.11/multiprocessing/process.py", line 108, in run
+fastapi_app          |     self._target(*self._args, **self._kwargs)
+fastapi_app          |   File "/usr/local/lib/python3.11/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+fastapi_app          |     target(sockets=sockets)
+fastapi_app          |   File "/usr/local/lib/python3.11/site-packages/uvicorn/server.py", line 67, in run
+fastapi_app          |     return asyncio.run(self.serve(sockets=sockets))
+fastapi_app          |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+fastapi_app          |   File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+fastapi_app          |     return runner.run(main)
+fastapi_app          |            ^^^^^^^^^^^^^^^^
+fastapi_app          |   File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+fastapi_app          |     return self._loop.run_until_complete(task)
+fastapi_app          |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+fastapi_app          |   File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+fastapi_app          |     return future.result()
+fastapi_app          |            ^^^^^^^^^^^^^^^
+fastapi_app          |   File "/usr/local/lib/python3.11/site-packages/uvicorn/server.py", line 71, in serve
+fastapi_app          |     await self._serve(sockets)
+fastapi_app          |   File "/usr/local/lib/python3.11/site-packages/uvicorn/server.py", line 78, in _serve
+fastapi_app          |     config.load()
+fastapi_app          |   File "/usr/local/lib/python3.11/site-packages/uvicorn/config.py", line 436, in load
+fastapi_app          |     self.loaded_app = import_from_string(self.app)
+fastapi_app          |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+fastapi_app          |   File "/usr/local/lib/python3.11/site-packages/uvicorn/importer.py", line 22, in import_from_string
+fastapi_app          |     raise exc from None
+fastapi_app          |   File "/usr/local/lib/python3.11/site-packages/uvicorn/importer.py", line 19, in import_from_string
+fastapi_app          |     module = importlib.import_module(module_str)
+fastapi_app          |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+fastapi_app          |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+fastapi_app          |     return _bootstrap._gcd_import(name[level:], package, level)
+fastapi_app          |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+fastapi_app          |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+fastapi_app          |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+fastapi_app          |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+fastapi_app          |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+fastapi_app          |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+fastapi_app          |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+fastapi_app          |   File "/app/main.py", line 6, in <module>
+fastapi_app          |     from prometheus_client import Counter, generate_latest, CONTENT_TYPE_LATEST
+fastapi_app          | ModuleNotFoundError: No module named 'prometheus_client'

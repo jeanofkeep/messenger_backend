@@ -1,8 +1,10 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Response
 from fastapi.middleware.cors import CORSMiddleware
 from database import Base, engine
 from users import router as users_router
 from messages import router as messages_router
+from prometheus_client import Counter, generate_latest, CONTENT_TYPE_LATEST
+
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
@@ -23,6 +25,11 @@ app.include_router(users_router)
 def root():
     return {"status": "ok"}
 
+REQUEST_COUNT = Counter("app_requests_total", "Total number of requests")
+
+@app.get("/metrics")
+def metrics():
+    return Response(generate_latest(), media_type=CONTENT_TYPE_LATEST)
 """
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
