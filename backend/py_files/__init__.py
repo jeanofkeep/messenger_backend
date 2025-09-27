@@ -1,1 +1,0 @@
-all = ['main', 'users', 'schemas', 'database', 'models']
